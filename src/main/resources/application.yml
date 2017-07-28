@@ -1,0 +1,39 @@
+app:
+  version: "%%VERSION%%"
+  
+server:
+  port: 10011
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+management:
+  security:
+    enabled: false
+    
+noAuthenticationPath: 
+  pathList: 
+    - /swagger-ui.html
+    - /webjars/**
+    - /swagger-resources/**
+    - /favicon.ico
+---
+spring: 
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/authdb?characterEncoding=utf-8
+    username: local
+    password: local
+---
+
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://mariadb:3306/tradedb?characterEncoding=utf-8
+
